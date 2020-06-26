@@ -1,0 +1,42 @@
+#端口号
+server:
+  port: 20522
+  servlet:
+    context-path: /gmall
+
+#打印日志
+  logging:
+    config:
+      classpath: logback.xml
+      # 日志级别
+    level: debug
+
+#dubbo配置
+dubbo:
+  application:
+    #dubbo中的服务名称
+    name: user-web
+  protocol:
+    #dubbo的通讯协议名称
+    name: dubbo
+  registry:
+    #zookeeper注册中心的地址
+    address: 39.106.10.6:2181
+    #zookeeper的通讯协议的名称
+    protocol: zookeeper
+    #启动时不检查注册中心是否已启动
+    check: false
+    #设置连接注册中心超时时间
+    timeout: 60000
+  module:
+    name: gmall-user-web
+  #dubbo的服务的扫描路径
+  #base-package: com.gmall
+  #启动时不检查是否有服务存在
+  consumer:
+    check: false
+    #设置消费方超时时间
+    timeout: 60000
+
+
+
