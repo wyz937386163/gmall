@@ -1,0 +1,68 @@
+#端口号
+server:
+  port: 20521
+  servlet:
+    context-path: /gmall
+
+#数据源
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gmall_all?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    username: root
+    password: root
+    #连接池的配置信息
+    druid:
+      initial-size: 10
+      min-idle: 10
+      max-active: 40
+      max-wait: 6000
+      time-between-eviction-runs-millis: 10000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filter: [stat,wall,log4j]
+      remove-abandoned: true
+      remove-abandoned-timeout: 3600
+      log-abandoned: false
+
+#Mybatis配置
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  #打印日志
+  logging:
+    config:
+      classpath: logback.xml
+    level: debug
+
+
+#dubbo配置
+dubbo:
+  application:
+    #dubbo中的服务名称
+    name: user-service
+  protocol:
+    #dubbo的通讯协议名称
+    name: dubbo
+  registry:
+    #zookeeper注册中心的地址
+    address: 39.106.10.6:2181
+    #zookeeper的通讯协议的名称
+    protocol: zookeeper
+    #启动时不检查注册中心是否已启动
+    check: false
+    #设置连接注册中心超时时间
+    timeout: 60000
+  module:
+    name: gmall-user-service
+  #dubbo的服务的扫描路径
+  #base-package: com.gmall
+  provider:
+    #设置提供方超时时间
+    timeout: 60000
+
