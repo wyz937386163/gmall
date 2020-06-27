@@ -1,6 +1,6 @@
 #端口号
 server:
-  port: 20522
+  port: 20520
   servlet:
     context-path: /gmall
 
